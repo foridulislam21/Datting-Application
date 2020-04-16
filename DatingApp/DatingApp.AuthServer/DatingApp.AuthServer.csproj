@@ -1,0 +1,14 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <ItemGroup>
+    <ProjectReference Include="..\DatingApp.AuthManager\DatingApp.AuthManager.csproj" />
+    <ProjectReference Include="..\DatingApp.DbServer\DatingApp.DbServer.csproj" />
+    <ProjectReference Include="..\DatingApp.Configurations\DatingApp.Configurations.csproj" />
+  </ItemGroup>
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+
+</Project>
