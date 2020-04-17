@@ -2,6 +2,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\DatingApp.Abstractions\DatingApp.Abstractions.csproj" />
+    <ProjectReference Include="..\DatingApp.DbServer\DatingApp.DbServer.csproj" />
   </ItemGroup>
 
   <ItemGroup>
