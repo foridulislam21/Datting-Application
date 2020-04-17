@@ -45,7 +45,7 @@ namespace DatingApp.AuthServer
                 app.UseDeveloperExceptionPage();
             }
 
-            app.UseHttpsRedirection();
+            // app.UseHttpsRedirection();
 
             app.UseRouting();
 
