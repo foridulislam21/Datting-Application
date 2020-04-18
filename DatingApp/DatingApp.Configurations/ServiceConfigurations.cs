@@ -15,6 +15,7 @@ namespace DatingApp.Configurations
             services.AddTransient<IValueRepository, ValueRepository>();
             services.AddTransient<IValueManager, ValueManager>();
             services.AddTransient<DbContext, DatingAppData>();
+            services.AddTransient<DatingAppData>();
         }
     }
 }

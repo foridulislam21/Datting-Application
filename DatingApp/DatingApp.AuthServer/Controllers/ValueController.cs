@@ -8,8 +8,8 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace DatingApp.AuthServer.Controllers
 {
-    [Authorize]
     [Route("api/[controller]")]
+    [Authorize]
     [ApiController]
     public class ValueController : ControllerBase
     {
@@ -26,27 +26,12 @@ namespace DatingApp.AuthServer.Controllers
             var values = await _manager.GetAll();
             return Ok(values);
         }
-
         // GET api/value/5
         [HttpGet("{id}")]
-        public ActionResult<string> GetstringById(int id)
+        public async Task<IActionResult> GetValue(int id)
         {
-            return null;
+            var value = await _manager.GetById(id);
+            return Ok(value);
         }
-
-        // POST api/value
-        [HttpPost("")]
-        public void Poststring(string value)
-        { }
-
-        // PUT api/value/5
-        [HttpPut("{id}")]
-        public void Putstring(int id, string value)
-        { }
-
-        // DELETE api/value/5
-        [HttpDelete("{id}")]
-        public void DeletestringById(int id)
-        { }
     }
 }
