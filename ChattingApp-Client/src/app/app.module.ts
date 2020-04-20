@@ -6,8 +6,8 @@ import { SlimLoadingBarModule } from 'ng2-slim-loading-bar';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { ValueComponent } from './value/value.component';
 import { HomeModule } from './home/home.module';
+import { ValueComponent } from './value/value.component';
 
 @NgModule({
   declarations: [

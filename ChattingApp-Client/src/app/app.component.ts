@@ -19,9 +19,7 @@ export class AppComponent {
       this.loader.start();
     }
     if (event instanceof NavigationEnd) {
-      setTimeout(() => {
-        this.loader.complete();
-      }, 2000);
+      this.loader.complete();
     }
     if (event instanceof NavigationCancel) {
       this.loader.stop();

@@ -2,8 +2,11 @@
   width: 400px;
 }
 .form-signin {
-  width: 100%;
+  width: 90%;
   max-width: 330px;
   padding: 15px;
   margin: auto;
+}
+.mat-card-actions .mat-button, .mat-card-actions .mat-raised-button, .mat-card-actions .mat-stroked-button {
+  margin: 0px;
 }

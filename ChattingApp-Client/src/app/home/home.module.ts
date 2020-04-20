@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
 import { SharedModule } from '../shared/shared.module';
 import { HomeRoutingModule } from './home-routing.module';
@@ -15,6 +15,10 @@ import { NavbarComponent } from './navbar/navbar.component';
     SharedModule,
     HomeRoutingModule
   ],
-  exports: [NavbarComponent]
+  exports: [
+    NavbarComponent,
+    HomeComponent
+  ],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class HomeModule { }

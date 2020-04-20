@@ -1,26 +1,48 @@
-<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+<nav class="navbar navbar-expand-md navbar-light bg-light">
   <a class="navbar-brand" href="#">Dating App</a>
 
   <ul class="navbar-nav mr-auto">
     <li class="nav-item active">
-      <a class="nav-link" href="#">Matches</a>
+      <a mat-button class="nav-link" href="#">Matches</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" href="#">Lists</a>
+      <a mat-button class="nav-link" href="#">Lists</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" href="#">Messages</a>
+      <a mat-button class="nav-link" href="#">Messages</a>
     </li>
   </ul>
-  <button
-    routerLink="/auth/login"
-    mat-raised-button
-    color="primary"
-    class="mr-2"
-  >
-    Login
-  </button>
-  <button mat-raised-button color="primary" type="submit">Register</button>
+  <div *ngIf="loggedIn()">
+    <a mat-button [matMenuTriggerFor]="menu">Welcome user</a>
+    <mat-menu #menu="matMenu" class="mt-2">
+      <a mat-menu-item>
+        <mat-icon>settings</mat-icon>
+        <span>Edit Profile</span>
+      </a>
+      <a mat-menu-item (click)="logout()">
+        <mat-icon>eject</mat-icon>
+        <span>Logout</span>
+      </a>
+    </mat-menu>
+  </div>
+  <div *ngIf="!loggedIn()">
+    <button
+      routerLink="/auth/login"
+      mat-button
+      color="accent"
+      class="mr-1"
+    >
+      <mat-icon>input</mat-icon>
+      Login
+    </button>
+    <button
+      routerLink="/auth/register"
+      mat-button
+      color="primary"
+    >
+      Register
+    </button>
+  </div>
 </nav>
 <div class="container-fluid">
   <router-outlet></router-outlet>
