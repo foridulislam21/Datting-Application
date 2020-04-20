@@ -68,11 +68,11 @@ namespace DatingApp.AuthServer
 
             app.UseRouting();
 
+            app.UseCors(options => options.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod());
+
             app.UseAuthentication();
 
             app.UseAuthorization();
-
-            app.UseCors(options => options.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod());
 
             app.UseEndpoints(endpoints =>
             {

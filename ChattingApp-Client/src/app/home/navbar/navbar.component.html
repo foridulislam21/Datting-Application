@@ -1,0 +1,27 @@
+<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+  <a class="navbar-brand" href="#">Dating App</a>
+
+  <ul class="navbar-nav mr-auto">
+    <li class="nav-item active">
+      <a class="nav-link" href="#">Matches</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="#">Lists</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="#">Messages</a>
+    </li>
+  </ul>
+  <button
+    routerLink="/auth/login"
+    mat-raised-button
+    color="primary"
+    class="mr-2"
+  >
+    Login
+  </button>
+  <button mat-raised-button color="primary" type="submit">Register</button>
+</nav>
+<div class="container-fluid">
+  <router-outlet></router-outlet>
+</div>
