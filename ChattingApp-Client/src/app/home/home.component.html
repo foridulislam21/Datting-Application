@@ -1,11 +1,18 @@
-<div class="container mt-5" *ngIf="!registerMode">
+<div class="container mt-5">
   <div style="text-align: center;">
     <h1>Find your match</h1>
     <p class="lead">
       Come on in to view your matches... All you need to do is sign up!
     </p>
     <div class="text-center">
-      <button routerLink="/auth/register" mat-raised-button color="primary" class="mr-2" (click)="registerToggle()" >Register</button>
+      <button
+        routerLink="/auth/register"
+        mat-raised-button
+        color="primary"
+        class="mr-2"
+      >
+        Register
+      </button>
       <button
         mat-raised-button
         style="color: white; background-color: #17a2b8; border-color: #17a2b8;"
@@ -14,7 +21,4 @@
       </button>
     </div>
   </div>
-</div>
-<div *ngIf="registerMode">
-  <app-register></app-register>
 </div>

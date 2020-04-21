@@ -19,6 +19,7 @@ namespace DatingApp.AuthServer.Controllers
             _manager = manager;
         }
 
+        [AllowAnonymous]
         // GET api/value
         [HttpGet("")]
         public async Task<IActionResult> GetValues()
