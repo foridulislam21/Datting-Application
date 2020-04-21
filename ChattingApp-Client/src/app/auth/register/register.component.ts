@@ -1,19 +1,30 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
+
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.css']
 })
-export class RegisterComponent implements OnInit {
+export class RegisterComponent implements OnInit, OnDestroy {
   hide = true;
   model: any = {};
-  constructor() { }
+  registerSubscription: Subscription;
+  constructor(private authService: AuthService) { }
 
   ngOnInit(): void {
   }
+  ngOnDestroy() {
+    this.registerSubscription.unsubscribe();
+  }
   register() {
-    console.log(this.model);
+    this.registerSubscription = this.authService.register(this.model).subscribe(() => {
+      console.log('Registration Successful');
+    }, error => {
+      console.log(error);
+    });
   }
   cancel() {
     console.log('Cancelled');

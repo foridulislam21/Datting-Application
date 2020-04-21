@@ -1,28 +1,14 @@
-import { Component, OnInit, OnDestroy, Input } from '@angular/core';
-import { Subscription } from 'rxjs';
-import { HttpClient } from '@angular/common/http';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
-export class HomeComponent implements OnInit, OnDestroy {
+export class HomeComponent implements OnInit {
   values: any;
-  valueSubscription: Subscription;
-  constructor(private http: HttpClient) { }
+  constructor() { }
 
   ngOnInit(): void {
-    this.getValues();
-  }
-  getValues() {
-    this.valueSubscription = this.http.get('http://localhost:5000/api/value').subscribe(response => {
-      this.values = response;
-    }, error => {
-      console.log(error);
-    });
-  }
-  ngOnDestroy() {
-    this.valueSubscription.unsubscribe();
   }
 }

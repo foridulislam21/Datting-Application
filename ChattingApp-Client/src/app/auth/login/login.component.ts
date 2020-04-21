@@ -1,23 +1,28 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { AuthService } from '../services/auth.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent implements OnInit, OnDestroy {
   hide = true;
   model: any = {};
+  loginSubscription: Subscription;
   constructor(private authService: AuthService) { }
 
   ngOnInit(): void {
   }
+  ngOnDestroy() {
+    this.loginSubscription.unsubscribe();
+  }
   login() {
-    this.authService.login(this.model).subscribe(next => {
+    this.loginSubscription = this.authService.login(this.model).subscribe(next => {
       console.log('Login in successfully');
     }, error => {
-      console.log('Failed to login');
+      console.log(error);
     });
   }
   loggedIn() {
