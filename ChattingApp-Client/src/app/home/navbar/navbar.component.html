@@ -12,6 +12,14 @@
       <a mat-button class="nav-link" href="#">Messages</a>
     </li>
   </ul>
+  <div>
+    <mat-spinner
+      color="accent"
+      [diameter]="25"
+      mode="indeterminate"
+      *ngIf="spinnerService.visibility | async"
+    ></mat-spinner>
+  </div>
   <div *ngIf="loggedIn()">
     <a mat-button [matMenuTriggerFor]="menu">Welcome user</a>
     <mat-menu #menu="matMenu" class="mt-2">
@@ -26,12 +34,7 @@
     </mat-menu>
   </div>
   <div *ngIf="!loggedIn()">
-    <button
-      routerLink="/auth/login"
-      mat-button
-      color="accent"
-      class="mr-1"
-    >
+    <button routerLink="/auth/login" mat-button color="accent" class="mr-1">
       <mat-icon>input</mat-icon>
       Login
     </button>
