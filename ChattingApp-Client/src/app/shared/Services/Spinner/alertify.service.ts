@@ -6,7 +6,7 @@ import * as alertify from 'alertifyjs';
 })
 export class AlertifyService {
   constructor() {}
-  confirm(message: string, okCallback: () => any) {
+  private confirm(message: string, okCallback: () => any) {
     alertify.confirm(message, (event: any) => {
       if (event) {
         okCallback();

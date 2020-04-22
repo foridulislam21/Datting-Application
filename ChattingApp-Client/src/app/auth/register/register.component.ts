@@ -22,7 +22,7 @@ export class RegisterComponent implements OnInit, OnDestroy {
   ngOnDestroy() {}
   register() {
     this.authService.register(this.model).subscribe(
-      () => {
+      (next) => {
         this.alertify.success('Registration Successful');
       },
       (error) => {
@@ -34,7 +34,6 @@ export class RegisterComponent implements OnInit, OnDestroy {
     console.log('Cancelled');
   }
   loggedIn() {
-    const token = localStorage.getItem('token');
-    return !!token;
+    this.authService.loggedIn();
   }
 }

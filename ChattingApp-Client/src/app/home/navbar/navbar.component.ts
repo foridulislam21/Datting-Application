@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { SpinnerService } from 'shared/Services/Spinner/spinner.service';
+import { AlertifyService } from 'shared/Services/Spinner/alertify.service';
+import { AuthService } from 'app/auth/services/auth.service';
 
 @Component({
   selector: 'app-navbar',
@@ -7,8 +9,11 @@ import { SpinnerService } from 'shared/Services/Spinner/spinner.service';
   styleUrls: ['./navbar.component.css'],
 })
 export class NavbarComponent implements OnInit {
-  showSpinner: boolean;
-  constructor(public spinnerService: SpinnerService) {}
+  constructor(
+    public spinnerService: SpinnerService,
+    private alertify: AlertifyService,
+    public authService: AuthService
+  ) {}
 
   ngOnInit(): void {}
   loggedIn() {
@@ -17,6 +22,6 @@ export class NavbarComponent implements OnInit {
   }
   logout() {
     localStorage.removeItem('token');
-    console.log('logged out');
+    this.alertify.message('logged out');
   }
 }

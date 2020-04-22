@@ -8,7 +8,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace DatingApp.Configurations
 {
-    public class ServiceConfigurations
+    public static class ServiceConfigurations
     {
         public static void Configure(IServiceCollection services)
         { 
