@@ -1,8 +1,8 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 
-import { AuthService } from '../services/auth.service';
-import { AlertifyService } from 'shared/Services/Spinner/alertify.service';
+import { AuthService } from 'shared/services/auth/auth.service';
+import { AlertifyService } from 'shared/services/spinner/alertify.service';
 
 @Component({
   selector: 'app-register',
@@ -34,6 +34,6 @@ export class RegisterComponent implements OnInit, OnDestroy {
     console.log('Cancelled');
   }
   loggedIn() {
-    this.authService.loggedIn();
+    return this.authService.loggedIn();
   }
 }

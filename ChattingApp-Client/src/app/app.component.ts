@@ -8,7 +8,7 @@ import {
   Router,
 } from '@angular/router';
 import { SlimLoadingBarService } from 'ng2-slim-loading-bar';
-import { AuthService } from './auth/services/auth.service';
+import { AuthService } from 'shared/services/auth/auth.service';
 import { JwtHelperService } from '@auth0/angular-jwt';
 
 @Component({

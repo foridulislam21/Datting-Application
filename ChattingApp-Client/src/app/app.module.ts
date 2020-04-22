@@ -3,17 +3,15 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SlimLoadingBarModule } from 'ng2-slim-loading-bar';
+import { AuthService } from 'shared/services/auth/auth.service';
+import { SharedModule } from 'shared/shared.module';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeModule } from './home/home.module';
-import { SharedModule } from 'shared/shared.module';
-import { AuthService } from './auth/services/auth.service';
 
 @NgModule({
-  declarations: [
-    AppComponent
-  ],
+  declarations: [AppComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -21,11 +19,9 @@ import { AuthService } from './auth/services/auth.service';
     SlimLoadingBarModule,
     BrowserAnimationsModule,
     HomeModule,
-    SharedModule
+    SharedModule,
   ],
   providers: [AuthService],
-  bootstrap: [
-    AppComponent
-  ]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

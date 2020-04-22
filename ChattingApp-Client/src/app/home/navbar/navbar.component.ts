@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { SpinnerService } from 'shared/Services/Spinner/spinner.service';
-import { AlertifyService } from 'shared/Services/Spinner/alertify.service';
-import { AuthService } from 'app/auth/services/auth.service';
+import { Router } from '@angular/router';
+import { AuthService } from 'shared/services/auth/auth.service';
+import { AlertifyService } from 'shared/services/spinner/alertify.service';
+import { SpinnerService } from 'shared/services/spinner/spinner.service';
 
 @Component({
   selector: 'app-navbar',
@@ -12,16 +13,17 @@ export class NavbarComponent implements OnInit {
   constructor(
     public spinnerService: SpinnerService,
     private alertify: AlertifyService,
-    public authService: AuthService
+    public authService: AuthService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {}
   loggedIn() {
-    const token = localStorage.getItem('token');
-    return !!token;
+    return this.authService.loggedIn();
   }
   logout() {
     localStorage.removeItem('token');
     this.alertify.message('logged out');
+    this.router.navigate(['/home']);
   }
 }

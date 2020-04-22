@@ -7,7 +7,7 @@ import {
   HttpResponse,
   HTTP_INTERCEPTORS,
 } from '@angular/common/http';
-import { SpinnerService } from 'shared/Services/Spinner/spinner.service';
+import { SpinnerService } from 'shared/services/spinner/spinner.service';
 import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { ErrorInterceptor } from './error.interceptor';
