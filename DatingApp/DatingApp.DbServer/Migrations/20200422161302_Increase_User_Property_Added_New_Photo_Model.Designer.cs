@@ -3,14 +3,16 @@ using System;
 using DatingApp.DbServer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace DatingApp.DbServer.Migrations
 {
     [DbContext(typeof(DatingAppData))]
-    partial class DatingAppDataModelSnapshot : ModelSnapshot
+    [Migration("20200422161302_Increase_User_Property_Added_New_Photo_Model")]
+    partial class Increase_User_Property_Added_New_Photo_Model
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
