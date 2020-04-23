@@ -11,9 +11,12 @@ namespace DatingApp.Configurations
     public static class ServiceConfigurations
     {
         public static void Configure(IServiceCollection services)
-        { 
+        {
             services.AddTransient<IValueRepository, ValueRepository>();
             services.AddTransient<IValueManager, ValueManager>();
+            // user
+            services.AddTransient<IUserRepository, UserRepository>();
+            services.AddTransient<IUserManager, UserManager>();
             services.AddTransient<DbContext, DatingAppData>();
             services.AddTransient<DatingAppData>();
         }

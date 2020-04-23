@@ -4,6 +4,7 @@ using System.Linq;
 using System.Net;
 using System.Text;
 using System.Threading.Tasks;
+using AutoMapper;
 using DatingApp.Configurations;
 using DatingApp.Configurations.AuthConfiguration;
 using DatingApp.Configurations.Helpers;
@@ -39,8 +40,8 @@ namespace DatingApp.AuthServer
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Latest);
             services.AddCors();
+            services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
             services.AddDbContext<DatingAppData>(x =>
                 x.UseSqlite(Configuration.GetConnectionString("DefaultConnection")));
             AuthServiceConfiguration.Configure(services);
@@ -57,7 +58,10 @@ namespace DatingApp.AuthServer
                     ValidateAudience = false
                     };
                 });
-            services.AddControllers();
+            services.AddControllers()
+                .AddNewtonsoftJson(option =>
+                    option.SerializerSettings.ReferenceLoopHandling =
+                    Newtonsoft.Json.ReferenceLoopHandling.Ignore);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
