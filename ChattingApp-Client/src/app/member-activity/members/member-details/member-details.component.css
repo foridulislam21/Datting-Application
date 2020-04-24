@@ -1,0 +1,11 @@
+.example-card {
+  max-width: 350px;
+}
+
+.example-header-image {
+  background-size: cover;
+}
+.mainImage {
+  background-size: cover;
+  height: 300px !important;
+}

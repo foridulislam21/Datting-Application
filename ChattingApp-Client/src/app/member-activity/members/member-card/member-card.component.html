@@ -1,0 +1,46 @@
+<mat-card class="card mb-4 mt-2">
+  <mat-card-header>
+    <img
+      mat-card-avatar
+      class="example-header-image"
+      src="{{ user.photoUrl }}"
+      alt=""
+      srcset=""
+    />
+    <mat-card-title class="mt-1" style="font-size: medium;">
+      {{ user.knownAs }}, {{ user.age }}</mat-card-title
+    >
+    <mat-card-subtitle>{{ user.lastActive | date:'shortTime' }}</mat-card-subtitle>
+  </mat-card-header>
+  <div class="card-img-wrapper">
+    <img
+      mat-card-image
+      class="card-image"
+      src="{{ user.photoUrl }}"
+      alt="{{ user.knownAs }}"
+    />
+    <ul class="list-inline member-icons animate text-center">
+      <li class="list-inline-item">
+        <button
+          mat-mini-fab
+          color="primary"
+          [routerLink]="['/member/', user.id]"
+        >
+          <mat-icon>person</mat-icon>
+        </button>
+      </li>
+      <li class="list-inline-item">
+        <button mat-mini-fab color="warn">
+          <mat-icon>favorite</mat-icon>
+        </button>
+      </li>
+      <li class="list-inline-item">
+        <button mat-mini-fab color="accent">
+          <mat-icon>mail</mat-icon>
+        </button>
+      </li>
+    </ul>
+  </div>
+
+  <mat-card-content> </mat-card-content>
+</mat-card>

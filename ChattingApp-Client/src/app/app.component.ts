@@ -10,6 +10,7 @@ import {
 import { SlimLoadingBarService } from 'ng2-slim-loading-bar';
 import { AuthService } from 'shared/services/auth/auth.service';
 import { JwtHelperService } from '@auth0/angular-jwt';
+import { SpinnerService } from 'shared/services/spinner/spinner.service';
 
 @Component({
   selector: 'app-root',
@@ -21,7 +22,8 @@ export class AppComponent implements OnInit {
   constructor(
     private loader: SlimLoadingBarService,
     private router: Router,
-    private authService: AuthService
+    private authService: AuthService,
+    public spinnerService: SpinnerService
   ) {
     this.router.events.subscribe((event: Event) => {
       this.navigationInterceptor(event);

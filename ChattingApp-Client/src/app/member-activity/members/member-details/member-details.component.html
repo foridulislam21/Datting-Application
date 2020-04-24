@@ -1,0 +1,44 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-sm-4">
+      <mat-card class="example-card mt-3">
+        <mat-card-header>
+          <img
+            mat-card-avatar
+            class="example-header-image"
+            src="{{ user?.photoUrl }}"
+          />
+          <mat-card-title>{{ user?.knownAs }}</mat-card-title>
+          <mat-card-subtitle>{{
+            user?.lastActive | date: "medium"
+          }}</mat-card-subtitle>
+        </mat-card-header>
+        <img
+          class="mainImage"
+          mat-card-image
+          src="{{ user?.photoUrl }}"
+          alt="{{ user?.knownAs }}"
+        />
+        <mat-card-content>
+          <div>
+            <strong>Location:</strong>
+            <p>{{ user?.city }}, {{ user?.country }}</p>
+          </div>
+          <div>
+            <strong>Age:</strong>
+            <p>{{ user?.age }}</p>
+          </div>
+          <div>
+            <strong>Member Since:</strong>
+            <p>{{ user?.created | date: "mediumDate" }}</p>
+          </div>
+        </mat-card-content>
+        <mat-card-actions>
+          <button mat-button>LIKE</button>
+          <button mat-button>SHARE</button>
+        </mat-card-actions>
+      </mat-card>
+    </div>
+    <div class="col-sm-8"></div>
+  </div>
+</div>

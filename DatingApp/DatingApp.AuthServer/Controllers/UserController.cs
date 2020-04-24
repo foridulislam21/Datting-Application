@@ -29,7 +29,7 @@ namespace DatingApp.AuthServer.Controllers
         public async Task<IActionResult> GetUsers()
         {
             var users = await _userManager.GetAll();
-            var usersToReturn = _mapper.Map<ICollection<UserforListDto>>(users);
+            var usersToReturn = _mapper.Map<IEnumerable<UserforListDto>>(users);
             return Ok(usersToReturn);
         }
 
