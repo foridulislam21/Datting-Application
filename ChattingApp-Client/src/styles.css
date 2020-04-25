@@ -13,3 +13,12 @@ body {
   margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
 }
+.mat-tab-label,
+.mat-tab-link {
+  color: maroon;
+}
+.ngx-gallery {
+  display: inline-block;
+  margin-bottom: 20px;
+  margin-top: 10px;
+}

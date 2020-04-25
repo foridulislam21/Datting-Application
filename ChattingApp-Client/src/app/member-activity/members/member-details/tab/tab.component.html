@@ -1,0 +1,43 @@
+<mat-card class="mt-3">
+  <mat-tab-group animationDuration="0ms">
+    <mat-tab>
+      <ng-template mat-tab-label> About {{ user.knownAs }} </ng-template>
+      <div>
+        <h1>Description</h1>
+        <p>{{ user.introduction }}</p>
+      </div>
+      <div>
+        <h1>Looking For</h1>
+        <p>{{ user.lookingFor }}</p>
+      </div>
+    </mat-tab>
+
+    <mat-tab>
+      <ng-template mat-tab-label>
+        Interests
+      </ng-template>
+      <div>
+        <h1>Interest</h1>
+        <p>{{ user.interests }}</p>
+      </div>
+    </mat-tab>
+
+    <mat-tab>
+      <ng-template mat-tab-label>
+        Photos
+      </ng-template>
+      <div>
+        <ngx-gallery
+          [options]="galleryOptions"
+          [images]="galleryImages"
+          class="ngx-gallery"
+        ></ngx-gallery>
+      </div>
+    </mat-tab>
+    <mat-tab>
+      <ng-template mat-tab-label>
+        Messages
+      </ng-template>
+    </mat-tab>
+  </mat-tab-group>
+</mat-card>

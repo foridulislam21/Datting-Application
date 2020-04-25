@@ -1,0 +1,45 @@
+<mat-card class="example-card mt-3">
+  <mat-card-header>
+    <img
+      mat-card-avatar
+      class="example-header-image"
+      src="{{ user.photoUrl }}"
+    />
+    <mat-card-title>{{ user.knownAs }}</mat-card-title>
+    <mat-card-subtitle>{{
+      user.lastActive | date: "medium"
+    }}</mat-card-subtitle>
+  </mat-card-header>
+  <div class="card-img-wrapper">
+    <img
+      class="mainImage"
+      mat-card-image
+      src="{{ user.photoUrl }}"
+      alt="{{ user.knownAs }}"
+    />
+  </div>
+  <mat-card-content>
+    <div>
+      <strong>Location:</strong>
+      <p>{{ user.city }}, {{ user.country }}</p>
+    </div>
+    <div>
+      <strong>Age:</strong>
+      <p>{{ user.age }}</p>
+    </div>
+    <div>
+      <strong>Member Since:</strong>
+      <p>{{ user.created | date: "mediumDate" }}</p>
+    </div>
+  </mat-card-content>
+  <mat-card-actions>
+    <div class="btn-group d-flex">
+      <button mat-raised-button color="primary" class="w-100">
+        LIKE
+      </button>
+      <button mat-raised-button color="accent" class="w-100">
+        Message
+      </button>
+    </div>
+  </mat-card-actions>
+</mat-card>

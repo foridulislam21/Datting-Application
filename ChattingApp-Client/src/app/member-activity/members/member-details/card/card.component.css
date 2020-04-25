@@ -1,0 +1,17 @@
+/* .example-card {
+  max-width: 320px;
+} */
+
+.example-header-image {
+  background-size: cover;
+}
+.card-img-wrapper {
+  margin: 15px;
+  width: 90%;
+  height: 85%;
+}
+.mainImage {
+  background-size: cover;
+  border-style: ridge;
+}
+
