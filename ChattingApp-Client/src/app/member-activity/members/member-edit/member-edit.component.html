@@ -1,0 +1,126 @@
+<div class="container-fluid mt-2">
+  <div class="row">
+    <div class="col-sm-3">
+      <h1>Your Profile</h1>
+    </div>
+    <div class="col-sm-9">
+      <div *ngIf="editForm.dirty">
+        <alert type="info">
+          <strong>Information:</strong> You have made changes. Any unsaved
+          changes will be lost!
+        </alert>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-3">
+      <mat-card class="example-card">
+        <mat-card-header>
+          <img
+            mat-card-avatar
+            class="example-header-image"
+            src="{{ user.photoUrl }}"
+          />
+          <mat-card-title>{{ user.knownAs }}</mat-card-title>
+          <mat-card-subtitle>{{
+            user.lastActive | date: "medium"
+          }}</mat-card-subtitle>
+        </mat-card-header>
+        <div class="card-img-wrapper">
+          <img
+            class="mainImage"
+            mat-card-image
+            src="{{ user.photoUrl }}"
+            alt="{{ user.knownAs }}"
+          />
+        </div>
+        <mat-card-content>
+          <div>
+            <strong>Location:</strong>
+            <p>{{ user.city }}, {{ user.country }}</p>
+          </div>
+          <div>
+            <strong>Age:</strong>
+            <p>{{ user.age }}</p>
+          </div>
+          <div>
+            <strong>Member Since:</strong>
+            <p>{{ user.created | date: "mediumDate" }}</p>
+          </div>
+        </mat-card-content>
+        <mat-card-actions>
+          <div class="btn-group d-flex">
+            <button
+            form="editForm"
+              [disabled]="!editForm.dirty"
+              mat-raised-button
+              color="primary"
+              class="btn-block"
+            >
+              Save Changes
+            </button>
+          </div>
+        </mat-card-actions>
+      </mat-card>
+    </div>
+    <div class="col-sm-9">
+      <div>
+        <mat-card class="">
+          <mat-tab-group animationDuration="0ms">
+            <mat-tab>
+              <ng-template mat-tab-label> Edit Profile </ng-template>
+              <form #editForm="ngForm" id="editForm" (ngSubmit)="updateUserDetails()">
+                <div class="mt-2">
+                  <mat-form-field style="width: 100%;" appearance="outline">
+                    <mat-label>Description</mat-label>
+                    <textarea
+                      matInput
+                      rows="5"
+                      name="introduction"
+                      [(ngModel)]="user.introduction"
+                    ></textarea>
+                  </mat-form-field>
+                  <mat-form-field style="width: 100%;" appearance="outline">
+                    <mat-label>Looking For</mat-label>
+                    <textarea
+                      matInput
+                      rows="5"
+                      name="lookingFor"
+                      [(ngModel)]="user.lookingFor"
+                    ></textarea>
+                  </mat-form-field>
+                  <mat-form-field style="width: 100%;" appearance="outline">
+                    <mat-label>Interest</mat-label>
+                    <textarea
+                      matInput
+                      rows="5"
+                      name="interests"
+                      [(ngModel)]="user.interests"
+                    ></textarea>
+                  </mat-form-field>
+                </div>
+                <div>
+                  <mat-form-field class="mr-2" appearance="outline">
+                    <mat-label>City</mat-label>
+                    <input matInput name="city" [(ngModel)]="user.city" />
+                  </mat-form-field>
+                  <mat-form-field appearance="outline">
+                    <mat-label>Country</mat-label>
+                    <input matInput name="country" [(ngModel)]="user.country" />
+                  </mat-form-field>
+                </div>
+              </form>
+            </mat-tab>
+
+            <mat-tab>
+              <ng-template mat-tab-label>
+                Edit Photos
+              </ng-template>
+              Will work with photos
+            </mat-tab>
+          </mat-tab-group>
+        </mat-card>
+      </div>
+    </div>
+  </div>
+</div>

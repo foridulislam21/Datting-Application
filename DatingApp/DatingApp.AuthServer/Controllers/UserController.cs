@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using AutoMapper;
 using DatingApp.Abstractions.BLL;
@@ -49,8 +50,20 @@ namespace DatingApp.AuthServer.Controllers
 
         // PUT api/user/5
         [HttpPut("{id}")]
-        public void Putstring(int id, string value)
-        { }
+        public async Task<IActionResult> UpdateUser(long id, UserForUpdateDto dto)
+        {
+            if (id != long.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
+            {
+                return Unauthorized();
+            }
+            var userFromRepo = await _userManager.GetById(id);
+            var userUpdate = _mapper.Map(dto, userFromRepo);
+            if (await _userManager.Update(userUpdate))
+            {
+                return NoContent();
+            }
+            throw new Exception($"Updating user {id} failed on save");
+        }
 
         // DELETE api/user/5
         [HttpDelete("{id}")]

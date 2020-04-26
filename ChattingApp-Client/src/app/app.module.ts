@@ -5,6 +5,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { JwtModule } from '@auth0/angular-jwt';
 import { SlimLoadingBarModule } from 'ng2-slim-loading-bar';
 import { MemberDetailResolver } from 'shared/resolvers/member-detail-resolver';
+import { MemberEditResolver } from 'shared/resolvers/member-edit-resolver';
 import { MemberListResolver } from 'shared/resolvers/member-list-resolver';
 import { AuthService } from 'shared/services/auth/auth.service';
 import { SharedModule } from 'shared/shared.module';
@@ -12,7 +13,6 @@ import { SharedModule } from 'shared/shared.module';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeModule } from './home/home.module';
-import { NgxGalleryModule } from '@kolkov/ngx-gallery';
 
 export function tokenGetter() {
   return localStorage.getItem('token');
@@ -27,7 +27,6 @@ export function tokenGetter() {
     BrowserAnimationsModule,
     HomeModule,
     SharedModule,
-    NgxGalleryModule,
     JwtModule.forRoot({
       config: {
         tokenGetter,
@@ -36,7 +35,12 @@ export function tokenGetter() {
       },
     }),
   ],
-  providers: [AuthService, MemberDetailResolver, MemberListResolver],
+  providers: [
+    AuthService,
+    MemberDetailResolver,
+    MemberListResolver,
+    MemberEditResolver,
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

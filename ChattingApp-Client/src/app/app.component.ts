@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Renderer2, AfterViewInit } from '@angular/core';
 import {
   Event,
   NavigationCancel,
@@ -17,17 +17,22 @@ import { SpinnerService } from 'shared/services/spinner/spinner.service';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
 })
-export class AppComponent implements OnInit {
+export class AppComponent implements OnInit, AfterViewInit {
   private jwtHelper = new JwtHelperService();
   constructor(
     private loader: SlimLoadingBarService,
     private router: Router,
     private authService: AuthService,
-    public spinnerService: SpinnerService
+    public spinnerService: SpinnerService,
+    private render: Renderer2
   ) {
     this.router.events.subscribe((event: Event) => {
       this.navigationInterceptor(event);
     });
+  }
+  ngAfterViewInit() {
+    const loader = this.render.selectRootElement('#loader');
+    loader.style.display = 'none';
   }
   ngOnInit() {
     const token = localStorage.getItem('token');
