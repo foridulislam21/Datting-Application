@@ -41,6 +41,7 @@ namespace DatingApp.AuthServer
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddCors();
+            services.Configure<CloudinarySettings>(Configuration.GetSection("CloudinarySettings"));
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
             services.AddDbContext<DatingAppData>(x =>
                 x.UseSqlite(Configuration.GetConnectionString("DefaultConnection")));

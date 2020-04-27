@@ -3,8 +3,7 @@ using DatingApp.Models;
 
 namespace DatingApp.Abstractions.BLL
 {
-    public interface IUserManager:IManager<User>
+    public interface IUserManager : IManager<User>
     {
-         
     }
 }

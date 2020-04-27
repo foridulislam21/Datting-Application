@@ -14,6 +14,8 @@ import { ProfileCardComponent } from './members/member-edit/profile-card/profile
 import { MemberListComponent } from './members/member-list/member-list.component';
 import { MessagesComponent } from './messages/messages.component';
 import { EditDetailsComponent } from './members/member-edit/edit-details/edit-details.component';
+import { PhotoEditorComponent } from './members/member-edit/photo-editor/photo-editor.component';
+import { FileUploadModule } from 'ng2-file-upload';
 
 @NgModule({
   declarations: [
@@ -28,7 +30,13 @@ import { EditDetailsComponent } from './members/member-edit/edit-details/edit-de
     MemberEditComponent,
     ProfileCardComponent,
     EditDetailsComponent,
+    PhotoEditorComponent,
   ],
-  imports: [SharedModule, MemberActivityRoutingModule, AlertModule.forRoot()],
+  imports: [
+    SharedModule,
+    MemberActivityRoutingModule,
+    AlertModule.forRoot(),
+    FileUploadModule,
+  ],
 })
 export class MemberActivityModule {}

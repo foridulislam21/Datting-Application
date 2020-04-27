@@ -33,6 +33,11 @@ namespace DatingApp.BLL.Base
             return await _repo.Remove(entity);
         }
 
+        public virtual async Task<bool> SaveAll()
+        {
+            return await _repo.SaveAll();
+        }
+
         public virtual async Task<bool> Update(T entity)
         {
             return await _repo.Update(entity);

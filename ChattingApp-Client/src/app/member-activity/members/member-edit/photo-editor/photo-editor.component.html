@@ -1,0 +1,108 @@
+<div class="row">
+  <div class="col-sm-2" *ngFor="let photo of photos">
+    <img
+      class="img-thumbnail p-1 m-2"
+      src="{{ photo.url }}"
+      alt=""
+      srcset=""
+    />
+    <div class="text-center">
+      <button mat-icon-button color="primary">
+        <mat-icon>home</mat-icon>
+      </button>
+      <button mat-icon-button color="warn">
+        <mat-icon>delete</mat-icon>
+      </button>
+    </div>
+  </div>
+</div>
+<div class="row mt-3 mb-3">
+  <div class="col-md-3">
+    <h2>Add Photos</h2>
+    <div
+      ng2FileDrop
+      [ngClass]="{ 'nv-file-over': hasBaseDropZoneOver }"
+      (fileOver)="fileOverBase($event)"
+      [uploader]="uploader"
+      class="card bg-faded p-3 text-center mb-3 my-drop-zone"
+    >
+      <i class="fa fa-upload fa-3x" aria-hidden="true"></i>
+      Drop Photos Here
+    </div>
+
+    Multiple
+    <input type="file" ng2FileSelect [uploader]="uploader" multiple /><br />
+
+    Single
+    <input type="file" ng2FileSelect [uploader]="uploader" />
+  </div>
+
+  <div
+    class="col-md-9"
+    style="margin-bottom: 40px;"
+    *ngIf="uploader?.queue?.length"
+  >
+    <h2>Upload queue</h2>
+    <p>Queue length: {{ uploader?.queue?.length }}</p>
+
+    <table class="table">
+      <thead>
+        <tr>
+          <th width="50%">Name</th>
+          <th>Size</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of uploader.queue">
+          <td>
+            <strong>{{ item?.file?.name }}</strong>
+          </td>
+          <td *ngIf="uploader.options.isHTML5" nowrap>
+            {{ item?.file?.size / 1024 / 1024 | number: ".2" }} MB
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div>
+      <div>
+        Queue progress:
+        <div class="progress">
+          <div
+            class="progress-bar"
+            role="progressbar"
+            [ngStyle]="{ width: uploader.progress + '%' }"
+          ></div>
+        </div>
+      </div>
+      <div class="mt-2">
+        <button
+          class="mr-2"
+          mat-raised-button
+          color="primary"
+          (click)="uploader.uploadAll()"
+          [disabled]="!uploader.getNotUploadedItems().length"
+        >
+          <span class="fa fa-upload"></span> Upload
+        </button>
+        <button
+          class="mr-2"
+          mat-raised-button
+          color="accent"
+          (click)="uploader.cancelAll()"
+          [disabled]="!uploader.isUploading"
+        >
+          <span class="fa fa-ban"></span> Cancel
+        </button>
+        <button
+          mat-raised-button
+          color="warn"
+          (click)="uploader.clearQueue()"
+          [disabled]="!uploader.queue.length"
+        >
+          <span class="fa fa-trash"></span> Remove
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

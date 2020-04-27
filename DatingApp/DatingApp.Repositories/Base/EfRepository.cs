@@ -35,6 +35,11 @@ namespace DatingApp.Repositories.Base
             return await _db.SaveChangesAsync() > 0;
         }
 
+        public virtual async Task<bool> SaveAll()
+        {
+            return await _db.SaveChangesAsync() > 0;
+        }
+
         public virtual async Task<bool> Update(T entity)
         {
             _db.Set<T>().Update(entity);

@@ -10,5 +10,6 @@ namespace DatingApp.Abstractions.Repository.Base
         Task<bool> Update(T entity);
         Task<ICollection<T>> GetAll();
         Task<T> GetById(long id);
+        Task<bool> SaveAll();
     }
 }

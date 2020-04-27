@@ -51,7 +51,7 @@
         <mat-card-actions>
           <div class="btn-group d-flex">
             <button
-            form="editForm"
+              form="editForm"
               [disabled]="!editForm.dirty"
               mat-raised-button
               color="primary"
@@ -69,7 +69,11 @@
           <mat-tab-group animationDuration="0ms">
             <mat-tab>
               <ng-template mat-tab-label> Edit Profile </ng-template>
-              <form #editForm="ngForm" id="editForm" (ngSubmit)="updateUserDetails()">
+              <form
+                #editForm="ngForm"
+                id="editForm"
+                (ngSubmit)="updateUserDetails()"
+              >
                 <div class="mt-2">
                   <mat-form-field style="width: 100%;" appearance="outline">
                     <mat-label>Description</mat-label>
@@ -116,7 +120,7 @@
               <ng-template mat-tab-label>
                 Edit Photos
               </ng-template>
-              Will work with photos
+              <app-photo-editor [photos]="user.photos"></app-photo-editor>
             </mat-tab>
           </mat-tab-group>
         </mat-card>
