@@ -10,6 +10,7 @@ import { SpinnerService } from 'shared/services/spinner/spinner.service';
   styleUrls: ['./navbar.component.css'],
 })
 export class NavbarComponent implements OnInit {
+  photoUrl: string;
   constructor(
     public spinnerService: SpinnerService,
     private alertify: AlertifyService,
@@ -17,12 +18,17 @@ export class NavbarComponent implements OnInit {
     private router: Router
   ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.authService.currentPhotoUrl.subscribe(photoUrl => this.photoUrl = photoUrl);
+  }
   loggedIn() {
     return this.authService.loggedIn();
   }
   logout() {
     localStorage.removeItem('token');
+    localStorage.removeItem('user');
+    this.authService.decodedToken = null;
+    this.authService.currentUser = null;
     this.alertify.message('logged out');
     this.router.navigate(['/home']);
   }

@@ -19,7 +19,7 @@
           <img
             mat-card-avatar
             class="example-header-image"
-            src="{{ user.photoUrl }}"
+            src="{{ photoUrl }}"
           />
           <mat-card-title>{{ user.knownAs }}</mat-card-title>
           <mat-card-subtitle>{{
@@ -30,7 +30,7 @@
           <img
             class="mainImage"
             mat-card-image
-            src="{{ user.photoUrl }}"
+            src="{{ photoUrl }}"
             alt="{{ user.knownAs }}"
           />
         </div>
@@ -120,7 +120,7 @@
               <ng-template mat-tab-label>
                 Edit Photos
               </ng-template>
-              <app-photo-editor [photos]="user.photos"></app-photo-editor>
+              <app-photo-editor [photos]="user.photos" (getMemberPhotoChange)="updateMainPhoto($event)"></app-photo-editor>
             </mat-tab>
           </mat-tab-group>
         </mat-card>

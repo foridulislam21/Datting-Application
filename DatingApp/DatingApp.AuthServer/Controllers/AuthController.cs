@@ -5,6 +5,7 @@ using System.Linq;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
+using AutoMapper;
 using DatingApp.AuthManager;
 using DatingApp.Models;
 using DatingApp.Models.DTOs;
@@ -20,8 +21,10 @@ namespace DatingApp.AuthServer.Controllers
     {
         private readonly IAuthManager _manager;
         private readonly IConfiguration _config;
-        public AuthController(IAuthManager manager, IConfiguration config)
+        private readonly IMapper _mapper;
+        public AuthController(IAuthManager manager, IConfiguration config, IMapper mapper)
         {
+            _mapper = mapper;
             _config = config;
             _manager = manager;
         }
@@ -48,7 +51,7 @@ namespace DatingApp.AuthServer.Controllers
             var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha512Signature);
 
             var tokenDescriptor = new SecurityTokenDescriptor
-            { 
+            {
                 Subject = new ClaimsIdentity(claims),
                 Expires = DateTime.Now.AddDays(1),
                 SigningCredentials = creds
@@ -57,9 +60,12 @@ namespace DatingApp.AuthServer.Controllers
             var tokenHandler = new JwtSecurityTokenHandler();
 
             var token = tokenHandler.CreateToken(tokenDescriptor);
+            var user = _mapper.Map<UserforListDto>(userFromRepo);
 
-            return Ok(new {
-                token = tokenHandler.WriteToken(token)
+            return Ok(new
+            {
+                token = tokenHandler.WriteToken(token),
+                user
             });
         }
 

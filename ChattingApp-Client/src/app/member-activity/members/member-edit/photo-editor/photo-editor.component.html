@@ -1,16 +1,22 @@
 <div class="row">
   <div class="col-sm-2" *ngFor="let photo of photos">
-    <img
-      class="img-thumbnail p-1 m-2"
-      src="{{ photo.url }}"
-      alt=""
-      srcset=""
-    />
+    <img class="img-thumbnail p-1 m-2" src="{{ photo.url }}" alt="" srcset="" />
     <div class="text-center">
-      <button mat-icon-button color="primary">
+      <button
+        (click)="setMainPhoto(photo)"
+        [disabled]="photo.isMain"
+        [ngClass]="photo.isMain ? 'bg-success' : 'bg-info'"
+        mat-icon-button
+        color="accent"
+      >
         <mat-icon>home</mat-icon>
       </button>
-      <button mat-icon-button color="warn">
+      <button
+        mat-icon-button
+        (click)="deletePhoto(photo.id)"
+        [disabled]="photo.isMain"
+        color="warn"
+      >
         <mat-icon>delete</mat-icon>
       </button>
     </div>

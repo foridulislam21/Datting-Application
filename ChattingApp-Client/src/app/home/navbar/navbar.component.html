@@ -24,12 +24,18 @@
       ></mat-spinner>
     </div>
     <div *ngIf="loggedIn()">
+      <span>
+        <img
+          src="{{ photoUrl }}"
+          class="rounded-circle"
+        />
+      </span>
       <a style="color: white;" mat-button [matMenuTriggerFor]="menu"
         >Welcome {{ authService.decodedToken?.unique_name | titlecase
         }}<mat-icon>keyboard_arrow_down</mat-icon></a
       >
       <mat-menu #menu="matMenu" class="mt-2">
-        <a mat-menu-item routerLink = "/member-edit">
+        <a mat-menu-item routerLink="/member-edit">
           <mat-icon>person</mat-icon>
           <span>Edit Profile</span>
         </a>
