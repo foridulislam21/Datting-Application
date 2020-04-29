@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SpinnerService } from 'shared/services/spinner/spinner.service';
 import { NgxGalleryModule } from '@kolkov/ngx-gallery';
 
@@ -10,8 +10,20 @@ import { SpinnerHttpInterceptorProvider } from './Interceptor/spinner.intercepto
 
 @NgModule({
   declarations: [],
-  imports: [CommonModule, AngularMaterialModule, FormsModule, NgxGalleryModule],
-  exports: [CommonModule, AngularMaterialModule, FormsModule, NgxGalleryModule],
+  imports: [
+    CommonModule,
+    AngularMaterialModule,
+    FormsModule,
+    NgxGalleryModule,
+    ReactiveFormsModule,
+  ],
+  exports: [
+    CommonModule,
+    AngularMaterialModule,
+    FormsModule,
+    NgxGalleryModule,
+    ReactiveFormsModule,
+  ],
   providers: [
     ErrorInterceptorProvider,
     SpinnerService,

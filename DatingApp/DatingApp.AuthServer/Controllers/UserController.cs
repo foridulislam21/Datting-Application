@@ -35,18 +35,13 @@ namespace DatingApp.AuthServer.Controllers
         }
 
         // GET api/user/5
-        [HttpGet("{id}")]
+        [HttpGet("{id}", Name = "GetUser")]
         public async Task<IActionResult> GetById(long id)
         {
             var user = await _userManager.GetById(id);
             var userToReturn = _mapper.Map<UserForDetailsDto>(user);
             return Ok(userToReturn);
         }
-
-        // POST api/user
-        [HttpPost("")]
-        public void Poststring(string value)
-        { }
 
         // PUT api/user/5
         [HttpPut("{id}")]
@@ -64,10 +59,5 @@ namespace DatingApp.AuthServer.Controllers
             }
             throw new Exception($"Updating user {id} failed on save");
         }
-
-        // DELETE api/user/5
-        [HttpDelete("{id}")]
-        public void DeletestringById(int id)
-        { }
     }
 }

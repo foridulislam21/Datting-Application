@@ -10,13 +10,15 @@
     <mat-card-title class="mt-1" style="font-size: medium;">
       {{ user.knownAs }}, {{ user.age }}</mat-card-title
     >
-    <mat-card-subtitle>{{ user.lastActive | date:'shortTime' }}</mat-card-subtitle>
+    <mat-card-subtitle>{{
+      user.lastActive | date: "shortTime"
+    }}</mat-card-subtitle>
   </mat-card-header>
   <div class="card-img-wrapper">
     <img
       mat-card-image
       class="card-image"
-      src="{{ user.photoUrl }}"
+      src="{{ user.photoUrl || '../../../../../../assets/PNG/user.png' }}"
       alt="{{ user.knownAs }}"
     />
     <ul class="list-inline member-icons animate text-center">

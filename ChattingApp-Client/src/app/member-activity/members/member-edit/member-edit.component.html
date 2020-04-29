@@ -19,7 +19,7 @@
           <img
             mat-card-avatar
             class="example-header-image"
-            src="{{ photoUrl }}"
+            src="{{ photoUrl || '../../../../../../assets/PNG/user.png'}}"
           />
           <mat-card-title>{{ user.knownAs }}</mat-card-title>
           <mat-card-subtitle>{{
@@ -30,7 +30,7 @@
           <img
             class="mainImage"
             mat-card-image
-            src="{{ photoUrl }}"
+            src="{{ photoUrl || '../../../../../../assets/PNG/user.png'}}"
             alt="{{ user.knownAs }}"
           />
         </div>

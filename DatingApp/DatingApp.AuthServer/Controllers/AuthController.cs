@@ -39,7 +39,7 @@ namespace DatingApp.AuthServer.Controllers
                 return Unauthorized();
             }
 
-            var claims = new []
+            var claims = new[]
             {
                 new Claim(ClaimTypes.NameIdentifier, userFromRepo.Id.ToString()),
                 new Claim(ClaimTypes.Name, userFromRepo.UserName)
@@ -78,13 +78,12 @@ namespace DatingApp.AuthServer.Controllers
             {
                 return BadRequest("User Already Exists");
             }
-            var userToCreate = new User
-            {
-                UserName = dto.UserName
-            };
+            var userToCreate = _mapper.Map<User>(dto);
 
             var createUser = await _manager.Register(userToCreate, dto.Password);
-            return StatusCode(201);
+
+            var userToReturn = _mapper.Map<UserForDetailsDto>(createUser);
+            return CreatedAtRoute("GetUser", new { Controller = "User", id = createUser.Id }, userToReturn);
         }
     }
 }

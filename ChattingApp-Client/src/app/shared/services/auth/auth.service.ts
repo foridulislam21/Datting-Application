@@ -35,8 +35,8 @@ changeMemberPhoto(photoUrl: string) {
       })
     );
   }
-  register(model: any) {
-    return this.http.post(this.baseAuthUrl + 'register', model);
+  register(user: User) {
+    return this.http.post(this.baseAuthUrl + 'register', user);
   }
   loggedIn() {
     const token = localStorage.getItem('token');

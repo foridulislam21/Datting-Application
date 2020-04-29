@@ -1,12 +1,17 @@
 .example-card {
-  width: 400px;
+  width: 500px;
 }
 .form-signin {
-  width: 90%;
-  max-width: 330px;
+  width: 100%;
+  max-width: 450px;
   padding: 15px;
   margin: auto;
 }
-.mat-card-actions .mat-button, .mat-card-actions .mat-raised-button, .mat-card-actions .mat-stroked-button {
+.mat-card-actions .mat-button,
+.mat-card-actions .mat-raised-button,
+.mat-card-actions .mat-stroked-button {
   margin: 0px;
+}
+.mat-radio-button ~ .mat-radio-button {
+  margin: 0 12px;
 }
