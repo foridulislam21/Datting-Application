@@ -1,4 +1,107 @@
+<div class="text-center mt-2">
+  <h1>Your matches - {{ pagination.totalItems }} found.</h1>
+</div>
 <div class="container-fluid">
+  <form class="form-inline" #form="ngForm" (ngSubmit)="loadUsers()" novalidate>
+    <div class="form-group">
+      <div class="input-group mb-3">
+        <div class="input-group-prepend">
+          <label
+            for="minAge"
+            class="input-group-text"
+            style="font-size: smaller; font-weight: 900;"
+            >From Age</label
+          >
+        </div>
+        <input
+          style="width: 70px;"
+          type="number"
+          id="minAge"
+          class="form-control mr-1"
+          name="minAge"
+          [(ngModel)]="userPrams.minAge"
+        />
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="input-group mb-3">
+        <div class="input-group-prepend">
+          <label
+            for="maxAge"
+            class="input-group-text"
+            style="font-size: smaller; font-weight: 900;"
+            >Age To</label
+          >
+        </div>
+        <input
+          [(ngModel)]="userPrams.maxAge"
+          style="width: 70px;"
+          type="number"
+          id="maxAge"
+          name="maxAge"
+          class="form-control mr-1"
+        />
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="input-group mb-3">
+        <div class="input-group-prepend">
+          <label
+            for="gender"
+            class="input-group-text"
+            style="font-size: smaller; font-weight: 900;"
+            >Show:</label
+          >
+        </div>
+        <select
+          style="width: 130px;"
+          id="gender"
+          name="gender"
+          [(ngModel)]="userPrams.gender"
+          class="form-control mr-2"
+        >
+          <option *ngFor="let gender of genderList" [value]="gender.value">{{
+            gender.display
+          }}</option>
+        </select>
+      </div>
+    </div>
+    <div class="form-group mb-3">
+      <button type="submit" mat-raised-button color="primary" class="mr-2">
+        Apply Filter
+      </button>
+      <button
+        mat-raised-button
+        color="accent"
+        type="button"
+        (click)="resetFilters()"
+      >
+        Reset Filter
+      </button>
+    </div>
+    <div class="col mb-3">
+      <div class="btn-group float-right">
+        <button
+          name="orderBy"
+          class="btn btn-primary"
+          (click)="loadUsers()"
+          btnRadio="lastActive"
+          [(ngModel)]="userPrams.orderBy"
+        >
+          Last Active
+        </button>
+        <button
+          name="orderBy"
+          class="btn btn-primary"
+          (click)="loadUsers()"
+          btnRadio="created"
+          [(ngModel)]="userPrams.orderBy"
+        >
+          Newest Members
+        </button>
+      </div>
+    </div>
+  </form>
   <div class="row">
     <div *ngFor="let user of users" class="col-lg-2 col-md-3 col-sm-6">
       <app-member-card [user]="user"></app-member-card>

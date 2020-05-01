@@ -1,8 +1,10 @@
 import { NgModule } from '@angular/core';
 import { FileUploadModule } from 'ng2-file-upload';
 import { AlertModule } from 'ngx-bootstrap/alert';
-import { SharedModule } from 'shared/shared.module';
+import { ButtonsModule } from 'ngx-bootstrap/buttons';
 import { PaginationModule } from 'ngx-bootstrap/pagination';
+import { DateAgoPipe } from 'shared/pipe/date-ago.pipe';
+import { SharedModule } from 'shared/shared.module';
 
 import { ListsComponent } from './lists/lists.component';
 import { MemberActivityRoutingModule } from './member-activity-routing.module';
@@ -17,7 +19,6 @@ import { PhotoEditorComponent } from './members/member-edit/photo-editor/photo-e
 import { ProfileCardComponent } from './members/member-edit/profile-card/profile-card.component';
 import { MemberListComponent } from './members/member-list/member-list.component';
 import { MessagesComponent } from './messages/messages.component';
-import { DateAgoPipe } from 'shared/pipe/date-ago.pipe';
 
 @NgModule({
   declarations: [
@@ -41,6 +42,7 @@ import { DateAgoPipe } from 'shared/pipe/date-ago.pipe';
     AlertModule.forRoot(),
     FileUploadModule,
     PaginationModule.forRoot(),
+    ButtonsModule.forRoot(),
   ],
 })
 export class MemberActivityModule {}

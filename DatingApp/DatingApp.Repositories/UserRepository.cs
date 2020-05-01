@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,10 +22,28 @@ namespace DatingApp.Repositories
         }
         public override async Task<PageList<User>> GetAll(UserPrams userPrams)
         {
-            var users =  _db.Users.Include(p => p.Photos).AsQueryable();
-            users = users.Where(u =>u.Id !=userPrams.UserId);
+            var users = _db.Users.Include(p => p.Photos).OrderByDescending(u => u.LastActive).AsQueryable();
+            users = users.Where(u => u.Id != userPrams.UserId);
             users = users.Where(u => u.Gender == userPrams.Gender);
-            return await PageList<User>.CreateAsync(users , userPrams.PageNumber, userPrams.PageSize);
+            if (userPrams.MinAge != 18 || userPrams.MaxAge != 99)
+            {
+                var minDob = DateTime.Today.AddYears(-userPrams.MaxAge - 1);
+                var maxDob = DateTime.Today.AddYears(-userPrams.MinAge);
+                users = users.Where(u => u.DateOfBirth >= minDob && u.DateOfBirth <= maxDob);
+            }
+            if (!string.IsNullOrEmpty(userPrams.OrderBy))
+            {
+                switch (userPrams.OrderBy)
+                {
+                    case "created":
+                        users = users.OrderByDescending(u => u.Created);
+                        break;
+                    default:
+                        users = users.OrderByDescending(u => u.LastActive);
+                        break;
+                }
+            }
+            return await PageList<User>.CreateAsync(users, userPrams.PageNumber, userPrams.PageSize);
         }
         public override async Task<User> GetById(long id)
         {

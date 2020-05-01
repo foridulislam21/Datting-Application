@@ -8,11 +8,9 @@
       srcset=""
     />
     <mat-card-title class="mt-1" style="font-size: medium;">
-      {{ user.knownAs }}, {{ user.age }}</mat-card-title
+      {{ user.knownAs | titlecase }}, {{ user.age }}</mat-card-title
     >
-    <mat-card-subtitle>{{
-      user.lastActive | dateAgo
-    }}</mat-card-subtitle>
+    <mat-card-subtitle>{{ user.lastActive | dateAgo }}</mat-card-subtitle>
   </mat-card-header>
   <div class="card-img-wrapper">
     <img
