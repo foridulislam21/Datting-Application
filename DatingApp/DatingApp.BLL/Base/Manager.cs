@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using DatingApp.Abstractions.BLL.Base;
 using DatingApp.Abstractions.Repository.Base;
+using DatingApp.Models.PaginationHelper;
 
 namespace DatingApp.BLL.Base
 {
@@ -18,9 +19,9 @@ namespace DatingApp.BLL.Base
             return await _repo.Add(entity);
         }
 
-        public virtual async Task<ICollection<T>> GetAll()
+        public virtual async Task<PageList<T>> GetAll(UserPrams userPrams)
         {
-            return await _repo.GetAll();
+            return await _repo.GetAll(userPrams);
         }
 
         public virtual async Task<T> GetById(long id)

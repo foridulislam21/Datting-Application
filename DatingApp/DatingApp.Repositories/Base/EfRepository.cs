@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using DatingApp.Abstractions.Repository.Base;
+using DatingApp.Models.PaginationHelper;
 using Microsoft.EntityFrameworkCore;
 
 namespace DatingApp.Repositories.Base
@@ -22,6 +23,12 @@ namespace DatingApp.Repositories.Base
         public virtual async Task<ICollection<T>> GetAll()
         {
             return await _db.Set<T>().ToListAsync();
+        }
+
+        public virtual async Task<PageList<T>> GetAll(UserPrams userPrams)
+        {
+            var TClass = _db.Set<T>();
+            return await PageList<T>.CreateAsync(TClass, userPrams.PageNumber, userPrams.PageSize);
         }
 
         public virtual async Task<T> GetById(long id)

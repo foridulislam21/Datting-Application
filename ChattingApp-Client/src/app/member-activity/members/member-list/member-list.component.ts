@@ -4,6 +4,7 @@ import { SlimLoadingBarService } from 'ng2-slim-loading-bar';
 import { User } from 'shared/Models/user';
 import { AlertifyService } from 'shared/services/spinner/alertify.service';
 import { UserService } from 'shared/services/user.service';
+import { Pagination, PaginatedResult } from 'shared/Models/Pagination';
 
 @Component({
   selector: 'app-member-list',
@@ -12,6 +13,7 @@ import { UserService } from 'shared/services/user.service';
 })
 export class MemberListComponent implements OnInit {
   users: User[];
+  pagination: Pagination;
   constructor(
     private userService: UserService,
     private alertify: AlertifyService,
@@ -21,19 +23,27 @@ export class MemberListComponent implements OnInit {
 
   ngOnInit(): void {
     this.route.data.subscribe((data) => {
-      this.users = data.users;
+      // tslint:disable-next-line: no-string-literal
+      this.users = data['users'].result;
+      // tslint:disable-next-line: no-string-literal
+      this.pagination = data['users'].pagination;
     });
   }
-  // loadUsers() {
-  //   this.loader.start();
-  //   this.userSubscription = this.userService.getUsers().subscribe(
-  //     (users: User[]) => {
-  //       this.users = users;
-  //       this.loader.complete();
-  //     },
-  //     (error) => {
-  //       this.alertify.error(error);
-  //     }
-  //   );
-  // }
+  pageChanged(event: any): void {
+    this.pagination.currentPage = event.page;
+    this.loadUsers();
+  }
+  loadUsers() {
+    this.userService
+      .getUsers(this.pagination.currentPage, this.pagination.itemsPerPage)
+      .subscribe(
+        (res: PaginatedResult<User[]>) => {
+          this.users = res.result;
+          this.pagination = res.pagination;
+        },
+        (error) => {
+          this.alertify.error(error);
+        }
+      );
+  }
 }

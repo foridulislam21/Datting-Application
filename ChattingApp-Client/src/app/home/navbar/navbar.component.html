@@ -15,14 +15,6 @@
         <a mat-button class="nav-link" [routerLink]="['/messages']">Messages</a>
       </li>
     </ul>
-    <div class="d-flex justify-content-center">
-      <mat-spinner
-        style="color: white;"
-        [diameter]="25"
-        mode="indeterminate"
-        *ngIf="spinnerService.visibility | async"
-      ></mat-spinner>
-    </div>
     <div *ngIf="loggedIn()">
       <span>
         <img

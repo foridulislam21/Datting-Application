@@ -12,8 +12,6 @@ namespace DatingApp.Configurations
     {
         public static void Configure(IServiceCollection services)
         {
-            services.AddTransient<IValueRepository, ValueRepository>();
-            services.AddTransient<IValueManager, ValueManager>();
             // user
             services.AddTransient<IUserRepository, UserRepository>();
             services.AddTransient<IUserManager, UserManager>();

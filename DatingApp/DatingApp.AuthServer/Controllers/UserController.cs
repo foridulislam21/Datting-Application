@@ -6,12 +6,15 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using AutoMapper;
 using DatingApp.Abstractions.BLL;
+using DatingApp.Configurations.Helpers;
 using DatingApp.Models.DTOs;
+using DatingApp.Models.PaginationHelper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DatingApp.AuthServer.Controllers
 {
+    [ServiceFilter(typeof(LogUserActivity))]
     [Authorize]
     [Route("api/[controller]")]
     [ApiController]
@@ -27,10 +30,19 @@ namespace DatingApp.AuthServer.Controllers
 
         // GET api/user
         [HttpGet("")]
-        public async Task<IActionResult> GetUsers()
+        public async Task<IActionResult> GetUsers([FromQuery]UserPrams userPrams)
         {
-            var users = await _userManager.GetAll();
+            var currentUserId = long.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
+            var userFromRepo = await _userManager.GetById(currentUserId);
+
+            userPrams.UserId = currentUserId;
+            if (string.IsNullOrEmpty(userPrams.Gender))
+            {
+                userPrams.Gender = userFromRepo.Gender == "male" ? "female" : "male";
+            }
+            var users = await _userManager.GetAll(userPrams);
             var usersToReturn = _mapper.Map<IEnumerable<UserforListDto>>(users);
+            Response.AddPagination(users.CurrentPage, users.PageSize, users.TotalCount, users.TotalPages);
             return Ok(usersToReturn);
         }
 

@@ -1,5 +1,14 @@
 <ng2-slim-loading-bar color="blue"></ng2-slim-loading-bar>
+
 <app-navbar></app-navbar>
+<div class="d-flex justify-content-center">
+  <mat-spinner
+    style="color: white;"
+    [diameter]="25"
+    mode="indeterminate"
+    *ngIf="spinnerService.visibility | async"
+  ></mat-spinner>
+</div>
 <div class="container-fluid">
   <router-outlet></router-outlet>
 </div>

@@ -23,7 +23,7 @@
           />
           <mat-card-title>{{ user.knownAs }}</mat-card-title>
           <mat-card-subtitle>{{
-            user.lastActive | date: "medium"
+            user.lastActive | dateAgo
           }}</mat-card-subtitle>
         </mat-card-header>
         <div class="card-img-wrapper">
