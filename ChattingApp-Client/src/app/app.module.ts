@@ -13,6 +13,7 @@ import { SharedModule } from 'shared/shared.module';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeModule } from './home/home.module';
+import { ListsResolver } from 'shared/resolvers/lists.resolver';
 
 export function tokenGetter() {
   return localStorage.getItem('token');
@@ -40,6 +41,7 @@ export function tokenGetter() {
     MemberDetailResolver,
     MemberListResolver,
     MemberEditResolver,
+    ListsResolver,
   ],
   bootstrap: [AppComponent],
 })

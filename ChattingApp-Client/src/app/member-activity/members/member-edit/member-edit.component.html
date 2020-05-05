@@ -19,18 +19,16 @@
           <img
             mat-card-avatar
             class="example-header-image"
-            src="{{ photoUrl || '../../../../../../assets/PNG/user.png'}}"
+            src="{{ photoUrl || '../../../../../../assets/PNG/user.png' }}"
           />
-          <mat-card-title>{{ user.knownAs }}</mat-card-title>
-          <mat-card-subtitle>{{
-            user.lastActive | dateAgo
-          }}</mat-card-subtitle>
+          <mat-card-title>{{ user.knownAs | titlecase }}</mat-card-title>
+          <mat-card-subtitle>{{ user.lastActive | dateAgo }}</mat-card-subtitle>
         </mat-card-header>
         <div class="card-img-wrapper">
           <img
             class="mainImage"
             mat-card-image
-            src="{{ photoUrl || '../../../../../../assets/PNG/user.png'}}"
+            src="{{ photoUrl || '../../../../../../assets/PNG/user.png' }}"
             alt="{{ user.knownAs }}"
           />
         </div>
@@ -120,7 +118,10 @@
               <ng-template mat-tab-label>
                 Edit Photos
               </ng-template>
-              <app-photo-editor [photos]="user.photos" (getMemberPhotoChange)="updateMainPhoto($event)"></app-photo-editor>
+              <app-photo-editor
+                [photos]="user.photos"
+                (getMemberPhotoChange)="updateMainPhoto($event)"
+              ></app-photo-editor>
             </mat-tab>
           </mat-tab-group>
         </mat-card>

@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using AutoMapper;
 using DatingApp.Abstractions.BLL;
 using DatingApp.Configurations.Helpers;
+using DatingApp.Models;
 using DatingApp.Models.DTOs;
 using DatingApp.Models.PaginationHelper;
 using Microsoft.AspNetCore.Authorization;
@@ -22,15 +23,17 @@ namespace DatingApp.AuthServer.Controllers
     {
         private readonly IUserManager _userManager;
         private readonly IMapper _mapper;
-        public UserController(IUserManager userManager, IMapper mapper)
+        private readonly ILikeManager _likeManager;
+        public UserController(IUserManager userManager, IMapper mapper, ILikeManager likeManager)
         {
+            _likeManager = likeManager;
             _mapper = mapper;
             _userManager = userManager;
         }
 
         // GET api/user
         [HttpGet("")]
-        public async Task<IActionResult> GetUsers([FromQuery]UserPrams userPrams)
+        public async Task<IActionResult> GetUsers([FromQuery] UserPrams userPrams)
         {
             var currentUserId = long.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
             var userFromRepo = await _userManager.GetById(currentUserId);
@@ -70,6 +73,37 @@ namespace DatingApp.AuthServer.Controllers
                 return NoContent();
             }
             throw new Exception($"Updating user {id} failed on save");
+        }
+
+        [HttpPost("{id}/like/{recipientId}")]
+        public async Task<IActionResult> LikeUser(long id, long recipientId)
+        {
+            if (id != long.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
+            {
+                return Unauthorized();
+            }
+
+            var like = await _likeManager.GetLike(id, recipientId);
+            if (like != null)
+            {
+                return BadRequest("You already Like this user");
+            }
+            var recipientUser = await _userManager.GetById(recipientId);
+            if (recipientUser == null)
+            {
+                return NotFound();
+            }
+            like = new Like
+            {
+                LikerId = id,
+                LikeeId = recipientId
+            };
+            var addedLike = await _likeManager.Add(like);
+            if (addedLike)
+            {
+                return Ok();
+            }
+            return BadRequest("Failed to like user");
         }
     }
 }

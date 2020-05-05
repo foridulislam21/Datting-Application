@@ -11,6 +11,7 @@ namespace DatingApp.BLL
         public UserManager(IUserRepository repo) : base(repo)
         {
             _repo = repo;
+
         }
     }
 }

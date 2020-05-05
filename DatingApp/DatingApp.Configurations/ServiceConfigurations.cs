@@ -18,6 +18,9 @@ namespace DatingApp.Configurations
             //photo
             services.AddTransient<IPhotoRepository, PhotoRepository>();
             services.AddTransient<IPhotoManager, PhotoManager>();
+            //Like
+            services.AddTransient<ILikeRepository, LikeRepository>();
+            services.AddTransient<ILikeManager, LikeManager>();
             services.AddTransient<DbContext, DatingAppData>();
             services.AddTransient<DatingAppData>();
         }
