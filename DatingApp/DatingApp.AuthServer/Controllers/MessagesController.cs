@@ -89,9 +89,18 @@ namespace DatingApp.AuthServer.Controllers
         }
 
         // PUT api/messages/5
-        [HttpPut("{id}")]
-        public void Putstring(int id, string value)
-        { }
+        [HttpGet("thread/{recipientId}")]
+        public async Task<IActionResult> GetMessageThread(long userId, long recipientId)
+        {
+            if (userId != long.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
+            {
+                return Unauthorized();
+            }
+            var messageFromRepo = await _messageManager.GetMessageThread(userId, recipientId);
+
+            var messageThread = _mapper.Map<IEnumerable<MessageForReturnDto>>(messageFromRepo);
+            return Ok(messageThread);
+        }
 
         // DELETE api/messages/5
         [HttpDelete("{id}")]

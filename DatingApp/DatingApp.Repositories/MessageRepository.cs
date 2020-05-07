@@ -1,11 +1,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+
 using DatingApp.Abstractions.Repository;
 using DatingApp.DbServer;
 using DatingApp.Models;
 using DatingApp.Models.PaginationHelper;
 using DatingApp.Repositories.Base;
+
 using Microsoft.EntityFrameworkCore;
 
 namespace DatingApp.Repositories
@@ -25,8 +27,8 @@ namespace DatingApp.Repositories
         public async Task<PageList<Message>> GetMessagesforUser(MessagePrams messagePrams)
         {
             var messages = _db.Messages
-            .Include(u => u.Sender).ThenInclude(p => p.Photos)
-            .Include(u => u.Recipient).ThenInclude(p => p.Photos).AsQueryable();
+                .Include(u => u.Sender).ThenInclude(p => p.Photos)
+                .Include(u => u.Recipient).ThenInclude(p => p.Photos).AsQueryable();
 
             switch (messagePrams.MessageContainer)
             {
@@ -46,7 +48,13 @@ namespace DatingApp.Repositories
 
         public async Task<IEnumerable<Message>> GetMessageThread(long userId, long recipientId)
         {
-            throw new System.NotImplementedException();
+            var messages = await _db.Messages
+                .Include(m => m.Sender).ThenInclude(p => p.Photos)
+                .Include(m => m.Recipient).ThenInclude(p => p.Photos)
+                .Where(u => u.RecipientId == userId && u.SenderId == recipientId ||
+                    u.RecipientId == recipientId && u.SenderId == userId)
+                .OrderByDescending(m => m.MessageSent).ToListAsync();
+            return messages;
         }
     }
 }
