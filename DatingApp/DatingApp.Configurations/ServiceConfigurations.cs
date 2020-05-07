@@ -21,6 +21,10 @@ namespace DatingApp.Configurations
             //Like
             services.AddTransient<ILikeRepository, LikeRepository>();
             services.AddTransient<ILikeManager, LikeManager>();
+            //message
+            services.AddTransient<IMessageRepository, MessageRepository>();
+            services.AddTransient<IMessageManager, MessageManager>();
+            //database
             services.AddTransient<DbContext, DatingAppData>();
             services.AddTransient<DatingAppData>();
         }
