@@ -1,0 +1,12 @@
+.example-card {
+  max-width: 350px;
+  margin: 15px;
+  height: 400px;
+  overflow-y: scroll;
+}
+.form-style {
+  max-width: 350px;
+}
+.ml-2, .mx-2 {
+  margin-left: 1rem !important;
+}

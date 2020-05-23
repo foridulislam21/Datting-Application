@@ -64,7 +64,8 @@ namespace DatingApp.AuthServer.Controllers
         [HttpPost("")]
         public async Task<IActionResult> CreateMessage(long userId, MessageForCreationDto messageForCreationDto)
         {
-            if (userId != long.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
+            var sender = await _userManager.GetById(userId);
+            if (sender.Id != long.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
             {
                 return Unauthorized();
             }
@@ -77,9 +78,11 @@ namespace DatingApp.AuthServer.Controllers
             var message = _mapper.Map<Message>(messageForCreationDto);
 
             var addMessage = await _messageManager.Add(message);
-            var messageToReturn = _mapper.Map<MessageForCreationDto>(message);
+
             if (addMessage)
             {
+                var messageToReturn = _mapper.Map<MessageForReturnDto>(message);
+
                 return CreatedAtRoute(new
                 {
                     id = message.Id

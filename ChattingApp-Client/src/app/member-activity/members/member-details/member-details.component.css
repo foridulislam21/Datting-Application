@@ -1,0 +1,18 @@
+.example-header-image {
+  background-size: cover;
+}
+.card-img-wrapper {
+  margin-left: 15px;
+  width: 90%;
+  height: 70%;
+}
+.mainImage {
+  background-size: cover;
+  border-style: ridge;
+}
+.example-tab-icon {
+  margin-right: 8px;
+}
+.change-color {
+  color: maroon !important;
+}

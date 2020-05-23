@@ -1,10 +1,101 @@
 <div class="container-fluid">
   <div class="row">
     <div class="col-sm-3">
-      <app-card [user]="user"></app-card>
+      <mat-card class="example-card mt-2">
+        <mat-card-header>
+          <img
+            mat-card-avatar
+            class="example-header-image"
+            src="{{ user.photoUrl || '../../../../../../assets/PNG/user.png' }}"
+          />
+          <mat-card-title>{{ user.knownAs | titlecase }}</mat-card-title>
+          <mat-card-subtitle>{{ user.lastActive | dateAgo }}</mat-card-subtitle>
+        </mat-card-header>
+        <div class="card-img-wrapper">
+          <img
+            class="mainImage"
+            mat-card-image
+            src="{{ user.photoUrl || '../../../../../../assets/PNG/user.png' }}"
+            alt="{{ user.knownAs }}"
+          />
+        </div>
+        <mat-card-content>
+          <div>
+            <strong>Location:</strong>
+            <p>{{ user.city }}, {{ user.country }}</p>
+          </div>
+          <div>
+            <strong>Age:</strong>
+            <p>{{ user.age }}</p>
+          </div>
+          <div>
+            <strong>Member Since:</strong>
+            <p>{{ user.created | date: "mediumDate" }}</p>
+          </div>
+        </mat-card-content>
+        <mat-card-actions>
+          <div class="btn-group d-flex">
+            <button mat-raised-button color="primary" class="w-100">
+              LIKE
+            </button>
+            <button
+              [routerLink]
+              mat-raised-button
+              color="accent"
+              class="w-100"
+              (click)="memberTabsClick(3)"
+            >
+              Message
+            </button>
+          </div>
+        </mat-card-actions>
+      </mat-card>
     </div>
     <div class="col-sm-9">
-      <app-tab [user]="user"></app-tab>
+      <mat-card class="mt-2">
+        <mat-tab-group animationDuration="0ms" #memberTabs [selectedIndex] = "selectedIndex">
+          <mat-tab>
+            <ng-template mat-tab-label> About {{ user.knownAs }} </ng-template>
+            <div>
+              <h1>Description</h1>
+              <p>{{ user.introduction }}</p>
+            </div>
+            <div>
+              <h1>Looking For</h1>
+              <p>{{ user.lookingFor }}</p>
+            </div>
+          </mat-tab>
+
+          <mat-tab>
+            <ng-template mat-tab-label>
+              Interests
+            </ng-template>
+            <div>
+              <h1>Interest</h1>
+              <p>{{ user.interests }}</p>
+            </div>
+          </mat-tab>
+
+          <mat-tab>
+            <ng-template mat-tab-label>
+              Photos
+            </ng-template>
+            <div class="d-flex justify-content-center">
+              <ngx-gallery
+                [options]="galleryOptions"
+                [images]="galleryImages"
+                class="ngx-gallery"
+              ></ngx-gallery>
+            </div>
+          </mat-tab>
+          <mat-tab>
+            <ng-template mat-tab-label>
+              Messages
+            </ng-template>
+            <app-member-message [recipientId]="user.id"></app-member-message>
+          </mat-tab>
+        </mat-tab-group>
+      </mat-card>
     </div>
   </div>
 </div>

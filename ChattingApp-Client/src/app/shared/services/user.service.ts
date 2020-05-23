@@ -105,4 +105,13 @@ export class UserService {
         })
       );
   }
+
+  getMessageThread(id: number, recipientId: number) {
+    return this.http.get<Message[]>(
+      this.url + 'user/' + id + '/messages/thread/' + recipientId
+    );
+  }
+  sendMessages(id: number, messages: Message) {
+    return this.http.post(this.url + 'user/' + id + '/messages', messages);
+  }
 }

@@ -34,7 +34,7 @@
           <mat-icon>favorite</mat-icon>
         </button>
       </li>
-      <li class="list-inline-item">
+      <li class="list-inline-item" [routerLink]="['/member/', user.id]" [queryParams]="{messages: 3}">
         <button mat-mini-fab color="accent">
           <mat-icon>mail</mat-icon>
         </button>

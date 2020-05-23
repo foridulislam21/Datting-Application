@@ -46,6 +46,7 @@
           '/member',
           messageContainer == 'Outbox' ? message.recipientId : message.senderId
         ]"
+        [queryParams] = "{messages: 3}"
       >
         <td>{{ message.content }}</td>
         <td>

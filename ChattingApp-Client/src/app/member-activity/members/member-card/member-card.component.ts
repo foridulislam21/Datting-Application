@@ -1,9 +1,8 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { User } from 'shared/Models/user';
 import { AuthService } from 'shared/services/auth/auth.service';
-import { UserService } from 'shared/services/user.service';
 import { AlertifyService } from 'shared/services/spinner/alertify.service';
-import { error } from 'protractor';
+import { UserService } from 'shared/services/user.service';
 
 @Component({
   selector: 'app-member-card',
